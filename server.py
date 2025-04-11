@@ -82,6 +82,9 @@ async def submit_feedback_other(
         "FEEDBACK": data.get("FEEDBACK")
     }
 
+    if data.get("OTHER_SOURCE_SPECIFICATION"):
+       feedback_data["OTHER_SOURCE_SPECIFICATION"] = data.get("OTHER_SOURCE_SPECIFICATION")
+
     other_feedbackCollection.insert_one(feedback_data)
     return {"message": "Feedback submitted successfully!"}
 
