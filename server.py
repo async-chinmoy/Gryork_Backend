@@ -1,3 +1,7 @@
+import os 
+from dotenv import load_dotenv
+load_dotenv()
+
 from fastapi import FastAPI, HTTPException, Query
 from pymongo import MongoClient
 from pymongo.errors import ConnectionFailure
@@ -7,7 +11,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi import Request
 
 
-
+MONGO_URI = os.getenv("MONGO_URI")
 
 # Initialize FastAPI app
 app = FastAPI(title="User Registration API")
@@ -21,7 +25,7 @@ app.add_middleware(
 
 # Setup MongoDB connection
 try:
-    client = MongoClient("mongodb://localhost:27017/")
+    client = MongoClient(MONGO_URI)
     db = client["Gryork"]
     contractor_feedbackCollection = db["Contractor"]
     worker_feedbackCollection = db["Worker"]
